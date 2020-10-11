@@ -1,36 +1,38 @@
 import React from 'react';
+
 import {
-  SafeAreaView,
   StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
 } from 'react-native';
 
+import { createAppContainer } from 'react-navigation';
+
 import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+  createStackNavigator,
+  // createSwitchNavigator,
+  // createBottomTabNavigator,
+} from 'react-navigation-stack';
 
-import {search, movie } from './mockData';
+import {Colors} from 'react-native/Libraries/NewAppScreen';
 
-import MovieView from './components/MovieView';
+import {search, movie} from './mockData';
+
+import MovieDetailsScreen from './screens/MovieDetailsScreen';
+import HomeScreen from './screens/HomeScreen';
+
+const MainStack = createStackNavigator(
+  {
+    MovieDetails: MovieDetailsScreen,
+    Home: HomeScreen,
+  },
+  {
+    initialRouteName: 'Home',
+  },
+);
+
+const AppContainer = createAppContainer(MainStack);
 
 const App = () => {
-  return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <View style={styles.container}>
-          <MovieView moviedata={movie}/>
-        </View>
-      </SafeAreaView>
-    </>
-  );
+  return <AppContainer screenProps={{movie}}/>;
 };
 
 const styles = StyleSheet.create({
