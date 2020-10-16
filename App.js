@@ -19,7 +19,7 @@ const App = () => {
     <NavigationContainer>
       <AppStack.Navigator initialRouteName="Home">
         <AppStack.Screen name="Home">
-          {(props) => <HomeScreen {...props} moviedetails={{ movie }} />}
+          {(props) => <HomeScreen {...props} moviedetails={{ movie }} movies={search.Search} />}
         </AppStack.Screen>
         <AppStack.Screen
           name="MovieDetails"

@@ -1,6 +1,7 @@
 import React from "react";
 import { Button, View, StyleSheet } from "react-native";
 import RowItem from "../components/RowItem";
+import MovieListView from "../components/MovieListView";
 
 const styles = StyleSheet.create({
   container: {
@@ -21,22 +22,26 @@ class HomeScreen extends React.Component {
   };
 
   render() {
+    this.props.movies[0] = this.props.moviedetails.movie;
     return (
       <View style={styles.container}>
-        <RowItem
-          movie={this.props.moviedetails.movie}
-          onMovieItemPress={this.handleButtonPress}
-        />
-
-        <RowItem
-          movie={{
-            ...this.props.moviedetails.movie,
-            Title: "Some Random Title",
-          }}
+        <MovieListView
+          movies={this.props.movies}
           onMovieItemPress={this.handleButtonPress}
         />
         {
           //<Button title="Click Me" onPress={this.handleButtonPress} />
+          //   <RowItem
+          //   movie={this.props.moviedetails.movie}
+          //   onMovieItemPress={this.handleButtonPress}
+          // />
+          // <RowItem
+          //   movie={{
+          //     ...this.props.moviedetails.movie,
+          //     Title: "Some Random Title",
+          //   }}
+          //   onMovieItemPress={this.handleButtonPress}
+          // />
         }
       </View>
     );

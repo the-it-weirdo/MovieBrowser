@@ -1,24 +1,25 @@
-import React from 'react';
-import {StyleSheet, View, Text, Image} from 'react-native';
+import React from "react";
+import { StyleSheet, View, Text, Image } from "react-native";
+import PropTypes from "prop-types";
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    alignItems: 'flex-start',
+    flexDirection: "row",
+    flexWrap: "wrap",
+    alignItems: "flex-start",
     padding: 10,
   },
   item: {
-    width: '50%',
+    width: "50%",
   },
   poster: {
     height: 200,
   },
   title: {
-    fontWeight: 'bold',
+    fontWeight: "bold",
     fontSize: 24,
-    textAlign: 'center',
+    textAlign: "center",
     padding: 5,
   },
   detailItem: {
@@ -26,13 +27,13 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   directorAndWriter: {
-    fontStyle: 'italic',
-    justifyContent: 'center',
+    fontStyle: "italic",
+    justifyContent: "center",
   },
 });
 
 const MovieView = (props) => {
-  let movie = props.moviedata;
+  let movie = props.movie;
   return (
     <View style={styles.container}>
       <View style={styles.item}>
@@ -52,10 +53,10 @@ const MovieView = (props) => {
         <Text style={styles.detailItem}>{movie.Year}</Text>
       </View>
       <Text style={styles.title}>{movie.Title}</Text>
-      <Text style={{...styles.directorAndWriter, ...styles.detailItem}}>
+      <Text style={{ ...styles.directorAndWriter, ...styles.detailItem }}>
         Directed by: {movie.Director}
       </Text>
-      <Text style={{...styles.directorAndWriter, ...styles.detailItem}}>
+      <Text style={{ ...styles.directorAndWriter, ...styles.detailItem }}>
         Written by: {movie.Writer}
       </Text>
       <Text>Starring: {movie.Actors}</Text>
@@ -95,4 +96,9 @@ const MovieView = (props) => {
   BoxOffice: 'N/A',
   Production: '20th Century Fox',
 */
+
+MovieView.propTypes = {
+  movie: PropTypes.object.isRequired,
+};
+
 export default MovieView;

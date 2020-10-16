@@ -1,5 +1,6 @@
 import React from "react";
 import { StyleSheet, View, Text, Image, TouchableOpacity } from "react-native";
+import PropTypes from "prop-types";
 
 const styles = StyleSheet.create({
   container: {
@@ -29,7 +30,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const Row = (props) => {
+const RowItem = (props) => {
   const movie = props.movie;
   return (
     <TouchableOpacity
@@ -53,4 +54,8 @@ const Row = (props) => {
   );
 };
 
-export default Row;
+RowItem.propTypes = {
+  movie: PropTypes.object.isRequired,
+};
+
+export default RowItem;
