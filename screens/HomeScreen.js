@@ -1,7 +1,7 @@
 import React from "react";
-import { Button, View, StyleSheet } from "react-native";
-import RowItem from "../components/RowItem";
+import { ActivityIndicator, View, StyleSheet } from "react-native";
 import MovieListView from "../components/MovieListView";
+import { getMovieDetails } from "../api/API";
 
 const styles = StyleSheet.create({
   container: {
@@ -13,35 +13,39 @@ const styles = StyleSheet.create({
 });
 
 class HomeScreen extends React.Component {
-  handleButtonPress = (movie) => {
+  state = {
+    isLoading: false,
+  };
+
+  handleListItemPress = (movie) => {
+    this.setState({ isLoading: true });
+    this.fetchMovieDetails(movie.key);
+  };
+
+  fetchMovieDetails = async (movieId) => {
+    console.log(
+      `Making network request for getMovieDetails from fetchMovieDetails in HomeScreen.js with argument ${movieId}`
+    );
+    const result = await getMovieDetails(movieId);
+    this.setState({ isLoading: false });
     const navigation = this.props.navigation;
     navigation.navigate("MovieDetails", {
-      title: movie.Title,
-      movie,
+      title: result.Title,
+      movie: result,
     });
   };
 
   render() {
-    this.props.movies[0] = this.props.moviedetails.movie;
+    if (this.state.isLoading) {
+      return <ActivityIndicator size="large" color="#f00" />;
+    }
     return (
       <View style={styles.container}>
-        <MovieListView
-          movies={this.props.movies}
-          onMovieItemPress={this.handleButtonPress}
-        />
         {
-          //<Button title="Click Me" onPress={this.handleButtonPress} />
-          //   <RowItem
-          //   movie={this.props.moviedetails.movie}
-          //   onMovieItemPress={this.handleButtonPress}
-          // />
-          // <RowItem
-          //   movie={{
-          //     ...this.props.moviedetails.movie,
-          //     Title: "Some Random Title",
-          //   }}
-          //   onMovieItemPress={this.handleButtonPress}
-          // />
+          <MovieListView
+            movies={this.props.movies}
+            onMovieItemPress={this.handleListItemPress}
+          />
         }
       </View>
     );
