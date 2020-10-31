@@ -15,7 +15,7 @@ const processMovies = (obj) => ({
   Poster: obj.Poster,
 });
 
-const searchMovie = async (searchQuery, page = 1) => {
+export const searchMovie = async (searchQuery, page = 1) => {
   let urlString = "";
   if (page === 1) {
     urlString = `${BASE_URL}${API_PARAM}${SEARCH_PARAM(searchQuery)}`;
@@ -33,7 +33,7 @@ const searchMovie = async (searchQuery, page = 1) => {
   }
 };
 
-const getMovieDetails = async (movieId) => {
+export const getMovieDetails = async (movieId) => {
   const urlString = `${BASE_URL}${API_PARAM}${MOVIE_ID_PARAM(movieId)}`;
   try {
     const response = await fetch(urlString);
