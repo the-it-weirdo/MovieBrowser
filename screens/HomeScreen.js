@@ -1,20 +1,42 @@
 import React from "react";
-import { ActivityIndicator, View, StyleSheet } from "react-native";
+import { ActivityIndicator, View } from "react-native";
 import MovieListView from "../components/MovieListView";
-import { getMovieDetails } from "../api/API";
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingHorizontal: 5,
-    alignContent: "space-between",
-    backgroundColor: "#fff",
-  },
-});
+import Header from "../components/Header";
+import { getMovieDetails, searchMovie } from "../api/API";
+import styles from "../styles/styles";
 
 class HomeScreen extends React.Component {
   state = {
     isLoading: false,
+    movies: [],
+  };
+
+  componentDidMount() {
+    this.props.navigation.setOptions({
+      headerTitle: (props) => (
+        <Header
+          {...props}
+          title={"Movie Browser"}
+          onSearchSubmit={this.onSearchSubmit}
+        />
+      ),
+      headerStyle: {
+        height: 120,
+      },
+    });
+  }
+
+  onSearchSubmit = async (searchArgument) => {
+    this.setState({ isLoading: true });
+    console.log(
+      `Making network request for searchMovie from onSearchSubmit in HomeScreen.js with argument: ${searchArgument}`
+    );
+    const searchResult = await searchMovie(searchArgument);
+    if (searchResult.Response === "True") {
+      this.setState({ isLoading: false, movies: searchResult.results });
+    } else {
+      this.setState({ isLoading: false, movies: [] });
+    }
   };
 
   handleListItemPress = (movie) => {
@@ -40,13 +62,11 @@ class HomeScreen extends React.Component {
       return <ActivityIndicator size="large" color="#f00" />;
     }
     return (
-      <View style={styles.container}>
-        {
-          <MovieListView
-            movies={this.props.movies}
-            onMovieItemPress={this.handleListItemPress}
-          />
-        }
+      <View style={styles.homeScreenContainer}>
+        <MovieListView
+          movies={this.state.movies}
+          onMovieItemPress={this.handleListItemPress}
+        />
       </View>
     );
   }

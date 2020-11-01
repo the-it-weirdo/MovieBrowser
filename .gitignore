@@ -14,3 +14,4 @@ web-build/
 api/apikey.json
 api/mockReqEg.js
 node_modules
+TASKS.md

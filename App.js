@@ -1,68 +1,16 @@
 import React from "react";
-
 import { StyleSheet } from "react-native";
-
 import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
-
 import { Colors } from "react-native/Libraries/NewAppScreen";
+import AppNavigator from "./navigation/AppNavigation";
 
-import { searchMovie } from "./api/API";
-
-import MovieDetailsScreen from "./screens/MovieDetailsScreen";
-import HomeScreen from "./screens/HomeScreen";
-import Header from "./screens/Header";
-
-const AppStack = createStackNavigator();
-
-class App extends React.Component {
-  state = {
-    movies: [],
-  };
-
-  onSearchSubmit = async (searchArgument) => {
-    console.log(
-      `Making network request for searchMovie from onSearchSubmit in App.js with argument: ${searchArgument}`
-    );
-    const searchResult = await searchMovie(searchArgument);
-    if (searchResult.Response === "True") {
-      this.setState({ movies: searchResult.results });
-    } else {
-      this.setState({ movies: [] })
-    }
-  };
-
-  render() {
-    return (
-      <NavigationContainer>
-        <AppStack.Navigator initialRouteName="Home">
-          <AppStack.Screen
-            name="Home"
-            options={{
-              headerTitle: (props) => (
-                <Header
-                  {...props}
-                  title={"Movie Browser"}
-                  onSearchSubmit={this.onSearchSubmit}
-                />
-              ),
-              headerStyle: {
-                height: 120,
-              },
-            }}
-          >
-            {(props) => <HomeScreen {...props} movies={this.state.movies} />}
-          </AppStack.Screen>
-          <AppStack.Screen
-            name="MovieDetails"
-            options={({ route }) => ({ title: route.params.title })}
-            component={MovieDetailsScreen}
-          />
-        </AppStack.Navigator>
-      </NavigationContainer>
-    );
-  }
-}
+const App = () => {
+  return (
+    <NavigationContainer>
+      <AppNavigator />
+    </NavigationContainer>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {

@@ -1,42 +1,13 @@
 import React from "react";
-import { StyleSheet, View, Text, Image } from "react-native";
+import { View, Text, Image } from "react-native";
 import PropTypes from "prop-types";
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: "row",
-    flexWrap: "wrap",
-    alignItems: "flex-start",
-    padding: 10,
-  },
-  item: {
-    width: "50%",
-  },
-  poster: {
-    height: 200,
-  },
-  title: {
-    fontWeight: "bold",
-    fontSize: 24,
-    textAlign: "center",
-    padding: 5,
-  },
-  detailItem: {
-    fontSize: 14,
-    padding: 10,
-  },
-  directorAndWriter: {
-    fontStyle: "italic",
-    justifyContent: "center",
-  },
-});
+import styles from "../styles/styles";
 
 const MovieView = (props) => {
   let movie = props.movie;
   return (
-    <View style={styles.container}>
-      <View style={styles.item}>
+    <View style={styles.movieDetailsContainer}>
+      <View style={styles.movieDetailsItem}>
         <Image
           style={styles.poster}
           source={{
@@ -45,14 +16,14 @@ const MovieView = (props) => {
           resizeMode="contain"
         />
       </View>
-      <View style={styles.item}>
+      <View style={styles.movieDetailsItem}>
         <Text style={styles.detailItem}>{movie.Released}</Text>
         <Text style={styles.detailItem}>{movie.Rated}</Text>
         <Text style={styles.detailItem}>{movie.Runtime}</Text>
         <Text style={styles.detailItem}>{movie.Genre}</Text>
         <Text style={styles.detailItem}>{movie.Year}</Text>
       </View>
-      <Text style={styles.title}>{movie.Title}</Text>
+      <Text style={styles.movieTitle}>{movie.Title}</Text>
       <Text style={{ ...styles.directorAndWriter, ...styles.detailItem }}>
         Directed by: {movie.Director}
       </Text>

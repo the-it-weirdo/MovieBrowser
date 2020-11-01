@@ -1,29 +1,7 @@
 import React from "react";
-import { TextInput, StyleSheet, Button, View } from "react-native";
+import { TextInput, Button, View } from "react-native";
 import PropTypes from "prop-types";
-
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: "row",
-    alignContent: "center",
-    justifyContent: "space-evenly",
-  },
-  input: {
-    borderWidth: 1,
-    width: "70%",
-    borderColor: "black",
-    alignSelf: "stretch",
-    marginHorizontal: 20,
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-    borderRadius: 50,
-  },
-  button: {
-    borderRadius: 50,
-    alignContent: "center",
-    justifyContent: "center",
-  },
-});
+import styles from "../styles/styles";
 
 export default class SearchView extends React.Component {
   state = {
@@ -40,15 +18,15 @@ export default class SearchView extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <View style={styles.searchViewContainer}>
         <TextInput
-          style={styles.input}
+          style={styles.searchViewInput}
           placeholder="Search Movie"
           value={this.state.searchText}
           onChangeText={this.onTextChange}
         />
         <Button
-          style={styles.button}
+          style={styles.searchViewButton}
           title="Search"
           onPress={this.onSearchSubmit}
         />
