@@ -1,7 +1,8 @@
 import React from "react";
-import { TextInput, Button, View } from "react-native";
+import { TextInput, Keyboard, View } from "react-native";
 import PropTypes from "prop-types";
 import styles from "../styles/styles";
+import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 
 export default class SearchView extends React.Component {
   state = {
@@ -13,6 +14,7 @@ export default class SearchView extends React.Component {
   };
 
   onSearchSubmit = () => {
+    Keyboard.dismiss();
     this.props.onSearchSubmit(this.state.searchText);
   };
 
@@ -25,11 +27,14 @@ export default class SearchView extends React.Component {
           value={this.state.searchText}
           onChangeText={this.onTextChange}
         />
-        <Button
-          style={styles.searchViewButton}
-          title="Search"
+        <MaterialIcons.Button
+          name="search"
           onPress={this.onSearchSubmit}
-        />
+          backgroundColor="#00aaff"
+          borderRadius={50}
+        >
+          Search
+        </MaterialIcons.Button>
       </View>
     );
   }
