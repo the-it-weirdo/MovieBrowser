@@ -14,4 +14,8 @@ web-build/
 api/apikey.json
 api/mockReqEg.js
 node_modules
+
+
+# custom
 TASKS.md
+mockData.js
