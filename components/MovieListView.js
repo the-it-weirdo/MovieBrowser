@@ -1,11 +1,10 @@
 import React from "react";
-import { SectionList, Text, FlatList } from "react-native";
+import { FlatList } from "react-native";
 import PropTypes from "prop-types";
 
 import RowItem from "./RowItem";
 
 const renderItem = ({ item }) => {
-  console.log(item);
   return <RowItem movie={item} onMovieItemPress={item.onMovieItemPress} />;
 };
 
@@ -24,7 +23,7 @@ const MovieListView = (props) => {
       data={data}
       keyExtractor={(item) => item.key}
       renderItem={renderItem}
-      ListEmptyComponent={() => <Text>Example</Text>}
+      ListEmptyComponent={props.listEmptyComponent}
     />
   );
 };
