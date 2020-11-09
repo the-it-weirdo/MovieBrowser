@@ -7,6 +7,13 @@ const SEARCH_PARAM = (argument) => `&s=${argument}`;
 const MOVIE_ID_PARAM = (movieId) => `&i=${movieId}`;
 const PAGE_PARAM = (page) => `&page=${page}`;
 
+export const RESPONSE_STATE = [
+  "OK",
+  "ERROR_NO_RESULT",
+  "FETCH_ERROR",
+  "UNKNOWN_ERROR_POSSIBLE_NO_INTERNET",
+];
+
 // {"Title":"Guardians of the Galaxy","Year":"2014","imdbID":"tt2015381","Type":"movie","Poster":"https://m.media-amazon.com/images/M/MV5BMTAwMjU5OTgxNjZeQTJeQWpwZ15BbWU4MDUxNDYxODEx._V1_SX300.jpg"}
 const processMovies = (obj) => ({
   key: obj.imdbID,
@@ -26,10 +33,38 @@ export const searchMovie = async (searchQuery, page = 1) => {
   }
   try {
     const response = await fetch(urlString);
-    const { Search, totalResults, Response } = await response.json();
-    return { results: Search.map(processMovies), totalResults, Response };
+    const { Search, totalResults, Response, Error } = await response.json();
+    if (Response === "True") {
+      return {
+        results: Search.map(processMovies),
+        totalResults,
+        Response: RESPONSE_STATE[0],
+        errMessage: "",
+      };
+    } else {
+      if (Error === "Too many results.") {
+        return {
+          results: [],
+          totalResults: 0,
+          Response: RESPONSE_STATE[1],
+          errMessage: Error,
+        };
+      } else {
+        return {
+          results: [],
+          totalResults: 0,
+          Response: RESPONSE_STATE[2],
+          errMessage: Error,
+        };
+      }
+    }
   } catch (err) {
-    return { Response: false, errMessage: err.message };
+    return {
+      results: [],
+      totalResults: 0,
+      Response: RESPONSE_STATE[3],
+      errMessage: err.message,
+    };
   }
 };
 
