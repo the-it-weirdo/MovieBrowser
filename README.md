@@ -1,6 +1,6 @@
 # Movie Browser
 
-A React-Native App.
+A React-Native App. It lets you search for a movie and look at the ratings, cast, director and brief plot of the movie.
 
 ## API
 I have used the [OMDb API](http://www.omdbapi.com/) for this app.
