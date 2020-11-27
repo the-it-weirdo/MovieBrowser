@@ -3,6 +3,7 @@ const apikey = apikeyfile.apikey;
 
 const API_PARAM = `&apikey=${apikey}`;
 const BASE_URL = "http://www.omdbapi.com/?";
+const ONLY_MOVIE_PARAM = "&type=movie";
 const SEARCH_PARAM = (argument) => `&s=${argument}`;
 const MOVIE_ID_PARAM = (movieId) => `&i=${movieId}`;
 const PAGE_PARAM = (page) => `&page=${page}`;
@@ -25,9 +26,9 @@ const processMovies = (obj) => ({
 export const searchMovie = async (searchQuery, page = 1) => {
   let urlString = "";
   if (page === 1) {
-    urlString = `${BASE_URL}${API_PARAM}${SEARCH_PARAM(searchQuery)}`;
+    urlString = `${BASE_URL}${API_PARAM}${ONLY_MOVIE_PARAM}${SEARCH_PARAM(searchQuery)}`;
   } else {
-    urlString = `${BASE_URL}${API_PARAM}${SEARCH_PARAM(
+    urlString = `${BASE_URL}${API_PARAM}${ONLY_MOVIE_PARAM}${SEARCH_PARAM(
       searchQuery
     )}${PAGE_PARAM(page)}`;
   }
