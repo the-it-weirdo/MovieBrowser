@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import Constants from "expo-constants";
 
 const styles = StyleSheet.create({
   // HomeScreen
@@ -91,6 +92,32 @@ const styles = StyleSheet.create({
     backgroundColor: "#00aaff",
     alignContent: "center",
     justifyContent: "center",
+  },
+  // AboutScreen
+  aboutScreenContainer: {
+    flex: 1,
+    paddingHorizontal: 5,
+    paddingTop: Constants.statusBarHeight,
+    backgroundColor: "#fff",
+  },
+  marginMedium: {
+    margin: 10,
+  },
+  aboutScreenTitle: {
+    fontWeight: "bold",
+    fontSize: 24,
+  },
+  centerText: {
+    textAlign: "center",
+  },
+  aboutScreenText: {
+    fontFamily: "monospace",
+    fontSize: 18,
+    textAlign: "justify",
+  },
+  sameLine: {
+    flexDirection: "row",
+    flexWrap: "wrap",
   },
 });
 
