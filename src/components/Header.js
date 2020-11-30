@@ -1,12 +1,10 @@
 import React from "react";
 import { Text, View } from "react-native";
 import PropTypes from "prop-types";
+import SearchView from "./SearchView";
 import styles from "../styles/styles";
 
-import SearchView from "./SearchView";
-
 const Header = (props) => {
-  //   const headerHeight = useHeaderHeight();
   return (
     <View style={styles.headerContainer}>
       <Text style={styles.headerTitleStyle}>{props.title}</Text>

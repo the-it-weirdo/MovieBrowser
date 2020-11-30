@@ -1,9 +1,9 @@
 import React from "react";
 import GraphicalUIResponse from "../components/GraphicalUIResponse";
-import notFound from "../assets/not-found.png";
-import sad from "../assets/sad.png";
-import wavingHand from "../assets/waving-hand.png";
 import { RESPONSE_STATE } from "../api/API";
+import notFound from "../../assets/not-found.png";
+import sad from "../../assets/sad.png";
+import wavingHand from "../../assets/waving-hand.png";
 
 export default function renderGraphicalUIResponse(firstLoad, response) {
   let imageSource = "";

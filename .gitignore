@@ -11,8 +11,9 @@ web-build/
 
 # macOS
 .DS_Store
-api/apikey.json
-api/mockReqEg.js
+#src/api/apikey.json
+src/api/mockReqEg.js
+rough.js
 node_modules
 
 
